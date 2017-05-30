@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>Detalle</h2>
+
+
+<div class="col-md-12" >
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+        <select class="form-control" id="especialidad">
+
+        </select>
+        <select class="form-control" id="servicio"></select>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+       
+        $.get('@Url.Action("getEspecialidad", "Home")',{   } , 
+            function(response) {
+                var select = $("#especialidad");
+                select.find('option').remove() ; 
+                $('<option>').val("NULL").text("[NO SELECCIONADO]").appendTo(select);
+                $.each(response,function(index,value) {
+                    $("<option>").val(value.CodEspec).text(value.NomEspec).appendTo(select) ;
+                }) ; 
+        }) ; 
+         
+       
+        $("#especialidad").change(function () {
+            var value = this.value;
+
+            $.get('@Url.Action("getServicio", "Home")', { codesp:value },
+          function (response) {
+              var select = $("#servicio");
+              select.find('option').remove();
+              $('<option>').val("NULL").text("[NO SELECCIONADO]").appendTo(select);
+              $.each(response, function (index, value) {
+                  $("<option>").val(value.CodServ).text(value.NomServ).appendTo(select);
+              });
+          });
+        }); 
+
+
+    }); 
+</script>

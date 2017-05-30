@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebApplication5.Models.Servicios>
+
+@{
+    ViewBag.Title = "ListaServicio";
+}
+
+<h2>ListaServicio</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Crear")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodServ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomServ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodEspec)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodEmp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodSede)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstServ)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodServ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomServ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodEspec)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodEmp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodSede)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstServ)
+        </td>
+        <td>
+           <a href="Edit?id=@item.CodServ">Editar</a>
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | 
+
+            @if (item.EstServ)
+            {
+                <a href="DeleteActivar?id=@item.CodServ&evento=1"><i class="fa fa-trash-o"></i></a>
+            }
+            else
+            {
+                <a href="DeleteActivar?id=@item.CodServ&evento=2"><i class="fa fa-plus"></i></a>
+            }
+
+
+        </td>
+    </tr>
+}
+
+</table>
